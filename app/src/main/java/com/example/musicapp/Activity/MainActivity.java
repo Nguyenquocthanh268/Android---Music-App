@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.musicapp.Adapter.MainViewPagerAdapter;
+import com.example.musicapp.Fragment.Fragment_Search;
 import com.example.musicapp.Fragment.Fragment_TrangChu;
 import com.example.musicapp.Fragment.LoadingDialog;
 import com.example.musicapp.R;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     {
         MainViewPagerAdapter mainViewPagerAdapter= new MainViewPagerAdapter(getSupportFragmentManager());
         mainViewPagerAdapter.addFragment(new Fragment_TrangChu(),"");
-        mainViewPagerAdapter.addFragment(new Fragment_TrangChu(),"");
+        mainViewPagerAdapter.addFragment(new Fragment_Search(),"");
         mainViewPagerAdapter.addFragment(new Fragment_TrangChu(),"");
         mainViewPagerAdapter.addFragment(new Fragment_TrangChu(),"");
         viewPager.setAdapter(mainViewPagerAdapter);
@@ -65,3 +66,4 @@ public class MainActivity extends AppCompatActivity {
 //        }
     }
 }
+

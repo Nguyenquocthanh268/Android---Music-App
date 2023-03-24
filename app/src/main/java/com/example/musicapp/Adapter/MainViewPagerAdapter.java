@@ -8,13 +8,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("deprecation")
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
-    private ArrayList<Fragment>  arrayFragment = new ArrayList<>();
-    private ArrayList<String> arraytitle = new ArrayList<>();
+    private final ArrayList<Fragment> arrayFragment = new ArrayList<>();
+    private final ArrayList<String> arraytitle = new ArrayList<>();
     public MainViewPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }
-
     @NonNull
     @Override
     public Fragment getItem(int position) {
@@ -25,12 +25,10 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return arrayFragment.size();
     }
-    public void addFragment(Fragment fragment, String title)
-    {
+    public void addFragment(Fragment fragment, String title){
         arrayFragment.add(fragment);
         arraytitle.add(title);
     }
-
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
