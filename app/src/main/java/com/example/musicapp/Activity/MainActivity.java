@@ -8,6 +8,7 @@ import android.os.Handler;
 
 import com.example.musicapp.Adapter.MainViewPagerAdapter;
 import com.example.musicapp.Fragment.Fragment_Search;
+import com.example.musicapp.Fragment.Fragment_Thu_Vien;
 import com.example.musicapp.Fragment.Fragment_TrangChu;
 import com.example.musicapp.Fragment.LoadingDialog;
 import com.example.musicapp.R;
@@ -39,14 +40,14 @@ public class MainActivity extends AppCompatActivity {
         MainViewPagerAdapter mainViewPagerAdapter= new MainViewPagerAdapter(getSupportFragmentManager());
         mainViewPagerAdapter.addFragment(new Fragment_TrangChu(),"");
         mainViewPagerAdapter.addFragment(new Fragment_Search(),"");
-        mainViewPagerAdapter.addFragment(new Fragment_TrangChu(),"");
-        mainViewPagerAdapter.addFragment(new Fragment_TrangChu(),"");
+        mainViewPagerAdapter.addFragment(new Fragment_Thu_Vien(),"");
+//        mainViewPagerAdapter.addFragment(new Fragment_TrangChu(),"");
         viewPager.setAdapter(mainViewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.baseline_home_24);
         tabLayout.getTabAt(1).setIcon(R.drawable.icontimkiem);
         tabLayout.getTabAt(2).setIcon(R.drawable.iconthuvien);
-        tabLayout.getTabAt(3).setIcon(R.drawable.iconlogo);
+//        tabLayout.getTabAt(3).setIcon(R.drawable.iconlogo);
     }
     public void anhxa()
     {
