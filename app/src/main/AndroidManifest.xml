@@ -18,6 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="preloaded_fonts_provider_class"
+            android:value="com.google.android.gms.fonts.GoogleFontsProvider" />
     </application>
 
 </manifest>
