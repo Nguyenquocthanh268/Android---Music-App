@@ -4,6 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Term6/LapTringDiDong/Android---Music-App/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Term6/ProjectMobile/Android---Music-App/app/src/main/res/drawable-v24/bgr_playnhac.xml" value="0.252" />
+        <entry key="..\:/Term6/ProjectMobile/Android---Music-App/app/src/main/res/drawable-v24/btn_facebook.xml" value="0.252" />
+        <entry key="..\:/Term6/ProjectMobile/Android---Music-App/app/src/main/res/drawable-v24/dark.xml" value="0.1405" />
+        <entry key="..\:/Term6/ProjectMobile/Android---Music-App/app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.1405" />
+        <entry key="..\:/Term6/ProjectMobile/Android---Music-App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1405" />
+        <entry key="..\:/Term6/ProjectMobile/Android---Music-App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1405" />
+        <entry key="..\:/Term6/ProjectMobile/Android---Music-App/app/src/main/res/font/aclonica.xml" value="0.14010416666666667" />
+        <entry key="..\:/Term6/ProjectMobile/Android---Music-App/app/src/main/res/font/molengo.xml" value="0.14010416666666667" />
+        <entry key="..\:/Term6/ProjectMobile/Android---Music-App/app/src/main/res/layout/activity_play_music.xml" value="0.228125" />
+        <entry key="..\:/Term6/ProjectMobile/Android---Music-App/app/src/main/res/layout/fragment_dianhac.xml" value="0.1" />
       </map>
     </option>
   </component>
