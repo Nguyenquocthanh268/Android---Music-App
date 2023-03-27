@@ -6,13 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Activity.MainActivity">
-    
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/myViewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10"
-        ></androidx.viewpager.widget.ViewPager>
+        >
+        <View
+            android:background="#FFF"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
+    </androidx.viewpager.widget.ViewPager>
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/myTabLayout"
         app:tabIndicatorColor="#FF91817F"
