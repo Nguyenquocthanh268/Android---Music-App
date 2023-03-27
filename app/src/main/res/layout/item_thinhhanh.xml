@@ -8,9 +8,9 @@
     android:layout_marginLeft="10dp">
 
     <LinearLayout
-        android:background="#000"
         android:orientation="vertical"
         android:id="@+id/linearcarviewthinhhanh"
+        android:background="#333030"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -34,7 +34,8 @@
             android:maxLines="2"
             android:text="textview"
             android:textColor="#B6B6B6"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:background="@android:color/transparent" />
 
     </LinearLayout>
 

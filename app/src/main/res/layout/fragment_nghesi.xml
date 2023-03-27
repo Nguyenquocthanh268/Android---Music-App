@@ -10,7 +10,7 @@
         android:id="@+id/txtnghesi"
         android:layout_marginTop="64dp"
         android:layout_marginStart="10dp"
-        android:text="Danh Sách Nghệ Sĩ"
+        android:text="Nghệ Sĩ"
         android:textColor="#FFFFFF"
         android:textSize="28sp"
         android:layout_width="wrap_content"
