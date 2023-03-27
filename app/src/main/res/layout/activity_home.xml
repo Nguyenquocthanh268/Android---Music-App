@@ -4,7 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="#000"
+android:background="#333030"
 android:orientation="vertical">
 <!--tools:context=".Activity.KhoiDongActivity">-->
 
@@ -25,7 +25,7 @@ android:orientation="vertical">
     android:id="@+id/myTabLayout"
     android:layout_width="match_parent"
     android:layout_height="55dp"
-    android:background="@drawable/bgr_maintab"
+    android:background="#B09B9B"
     app:tabIndicatorColor="#C3C3C3"
     app:tabIndicatorHeight="1dp"
     app:tabMode="fixed"
