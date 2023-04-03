@@ -1,5 +1,4 @@
 package com.example.musicapp.Adapter;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -10,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.example.musicapp.Model.ChuDeModel;
 import com.example.musicapp.R;
@@ -37,19 +37,22 @@ public class ChuDeAdapter extends RecyclerView.Adapter<ChuDeAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChuDeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ChuDeAdapter.ViewHolder holder, final int position) {
         ChuDeModel chuDe = mangchude.get(position);
         holder.txttenchude.setText(chuDe.getTenChuDe());
-        Picasso.get().load(chuDe.getHinhChuDe()).into(holder.imgchude);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
+        Picasso.get(/*context*/).load(chuDe.getHinhChuDe()).into(holder.imgchude);
+//        view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+//                intent.putExtra("intentchude", mangchude.get(position));
+//                context.startActivity(intent);
+//            }
+//        });
     }
 
     @Override
-    public int getItemCount()  {
+    public int getItemCount() {
         return mangchude != null ? mangchude.size() : 0;
     }
 
