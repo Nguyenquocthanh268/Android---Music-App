@@ -16,9 +16,15 @@ import com.example.musicapp.Adapter.ThinhHanhAdapter;
 import com.example.musicapp.Model.NgheSiModel;
 import com.example.musicapp.Model.ThinhHanhModel;
 import com.example.musicapp.R;
+import com.example.musicapp.Service_API.APIService;
+import com.example.musicapp.Service_API.Dataservice;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 //import retrofit2.Call;
 //import retrofit2.Callback;
@@ -42,15 +48,24 @@ public class Fragment_ThinhHanh extends Fragment {
     }
 
     private void GetData() {
-        thinhHanhAdapter = new ThinhHanhAdapter(getActivity(), mangthinhhanh);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerViewthinhhanh.setLayoutManager(linearLayoutManager);
-        recyclerViewthinhhanh.setAdapter(thinhHanhAdapter);
-        mangthinhhanh.add(new ThinhHanhModel("TH01","Nhạc Hoa Thịnh Hành",
-                "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/1/9/f/7/19f7601ee9899da6f07de343c4165e73.jpg"));
-        mangthinhhanh.add(new ThinhHanhModel("TH02","Album của Vũ","https://2sao.vietnamnetjsc.vn/images/2022/09/15/18/19/v1.png"));
-        mangthinhhanh.add(new ThinhHanhModel("TH03","Album truyền thống","https://images2.thanhnien.vn/uploaded/congthang/2018_01_22/biamylinh2_UHWN.jpg?width=500"));
-        thinhHanhAdapter.notifyDataSetChanged();
+        Dataservice dataservice = APIService.getService();
+        Call<List<ThinhHanhModel>> callback = dataservice.GetThinhHanhCurrent();
+        callback.enqueue(new Callback<List<ThinhHanhModel>>() {
+            @Override
+            public void onResponse(Call<List<ThinhHanhModel>> call, Response<List<ThinhHanhModel>> response) {
+                ArrayList<ThinhHanhModel> mangthinhhanh = (ArrayList<ThinhHanhModel>) response.body();
+                thinhHanhAdapter = new ThinhHanhAdapter(getActivity(), mangthinhhanh);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                recyclerViewthinhhanh.setLayoutManager(linearLayoutManager);
+                recyclerViewthinhhanh.setAdapter(thinhHanhAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<ThinhHanhModel>> call, Throwable t) {
+
+            }
+
+        });
     }
 }

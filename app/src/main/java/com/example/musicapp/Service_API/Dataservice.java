@@ -25,10 +25,10 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface Dataservice {
-    @GET("playlistcurrentday.php")
+    @GET("playlistforcurrentday.php")
     Call<List<PlaylistModel>> GetPlaylistCurrentDay();
 
-    @GET("nghesicurrent.php")
+    @GET("nghesiforcurrentday.php")
     Call<List<NgheSiModel>> GetNgheSiCurrent();
 
     @GET("thinhhanhcurrent.php")

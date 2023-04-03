@@ -18,8 +18,15 @@ import com.example.musicapp.Adapter.PlaylistAdapter;
 import com.example.musicapp.Model.PhoBienModel;
 import com.example.musicapp.Model.PlaylistModel;
 import com.example.musicapp.R;
+import com.example.musicapp.Service_API.APIService;
+import com.example.musicapp.Service_API.Dataservice;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Fragment_PhoBien extends Fragment {
 
@@ -40,14 +47,25 @@ public class Fragment_PhoBien extends Fragment {
     }
 
     private void GetData() {
-        phoBienAdapter = new PhoBienAdapter(getActivity(), mangphobien);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerViewphobien.setLayoutManager(linearLayoutManager);
-        recyclerViewphobien.setAdapter(phoBienAdapter);
-        mangphobien.add(new PhoBienModel("PB01","Best of Chillies","https://i.scdn.co/image/ab67706c0000da84063dac83fe6ab9f4e676c089"));
-        mangphobien.add(new PhoBienModel("PB02","Nhac Hoa","https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/1/9/f/7/19f7601ee9899da6f07de343c4165e73.jpg"));
-        mangphobien.add(new PhoBienModel("PB03","Trung Quan Idol","https://icdn.dantri.com.vn/thumb_w/770/2022/05/03/ca-si-trung-quan-1651574722985.png"));
-        phoBienAdapter.notifyDataSetChanged();
+        Dataservice dataservice = APIService.getService();
+        Call<List<PhoBienModel>> callback = dataservice.GetPhoBienCurrent();
+        callback.enqueue(new Callback<List<PhoBienModel>>() {
+            @Override
+            public void onResponse(Call<List<PhoBienModel>> call, Response<List<PhoBienModel>> response) {
+                ArrayList<PhoBienModel> mangphobien = (ArrayList<PhoBienModel>) response.body();
+                phoBienAdapter = new PhoBienAdapter(getActivity(), mangphobien);
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                recyclerViewphobien.setLayoutManager(linearLayoutManager);
+                recyclerViewphobien.setAdapter(phoBienAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<PhoBienModel>> call, Throwable t) {
+
+            }
+
+        });
     }
 }
