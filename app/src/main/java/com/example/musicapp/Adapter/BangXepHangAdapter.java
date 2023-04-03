@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.musicapp.Activity.DanhsachbaihatActivity;
 import com.example.musicapp.Model.BangXepHangModel;
 import com.example.musicapp.R;
 import com.squareup.picasso.Picasso;
@@ -36,13 +36,16 @@ public class BangXepHangAdapter extends RecyclerView.Adapter<BangXepHangAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BangXepHangAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BangXepHangAdapter.ViewHolder holder, final int position) {
         BangXepHangModel bangXepHang = mangbangxephang.get(position);
         holder.txtbangxephang.setText(bangXepHang.getTenBangXepHang());
-        Picasso.get().load(bangXepHang.getHinhBangXepHang()).into(holder.imgbangxephang);
+        Picasso.get(/*context*/).load(bangXepHang.getHinhBangXepHang()).into(holder.imgbangxephang);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+                intent.putExtra("intentbangxephang", mangbangxephang.get(position));
+                context.startActivity(intent);
             }
         });
     }
