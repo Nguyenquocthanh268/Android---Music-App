@@ -25,8 +25,8 @@ import com.example.musicapp.Model.PlaylistModel;
 import com.example.musicapp.Model.ThinhHanhModel;
 //import com.example.musicapp.Model.ThuVienPlayListModel;
 import com.example.musicapp.R;
-//import com.example.musicapp.Service_API.APIService;
-//import com.example.musicapp.Service_API.Dataservice;
+import com.example.musicapp.Service_API.APIService;
+import com.example.musicapp.Service_API.Dataservice;
 import com.example.musicapp.Model.NgheSiModel;
 import com.example.musicapp.Model.PlaylistModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -166,40 +166,40 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
 //        });
     }
     private void GetDataBangXepHang(String id) {
-//        Dataservice dataservice = APIService.getService();
-//        Call<List<BaiHatModel>> callback = dataservice.GetDanhsachbaihatbangxephang(id);
-//        callback.enqueue(new Callback<List<BaiHatModel>>() {
-//            @Override
-//            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
-//                mangbaihat = (ArrayList<BaiHatModel>) response.body();
-//                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
-//                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
-//                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
-//
-//            }
-//        });
+        Dataservice dataservice = APIService.getService();
+        Call<List<BaiHatModel>> callback = dataservice.GetDanhsachbaihatbangxephang(id);
+        callback.enqueue(new Callback<List<BaiHatModel>>() {
+            @Override
+            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
+                mangbaihat = (ArrayList<BaiHatModel>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
+
+            }
+        });
     }
     private void GetDataChuDe(String id) {
-//        Dataservice dataservice = APIService.getService();
-//        Call<List<BaiHatModel>> callback = dataservice.GetDanhsachbaihatchude(id);
-//        callback.enqueue(new Callback<List<BaiHatModel>>() {
-//            @Override
-//            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
-//                mangbaihat = (ArrayList<BaiHatModel>) response.body();
-//                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
-//                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
-//                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
-//
-//            }
-//        });
+        Dataservice dataservice = APIService.getService();
+        Call<List<BaiHatModel>> callback = dataservice.GetDanhsachbaihatchude(id);
+        callback.enqueue(new Callback<List<BaiHatModel>>() {
+            @Override
+            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
+                mangbaihat = (ArrayList<BaiHatModel>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
+
+            }
+        });
     }
     private void GetDataNgheSi(String id) {
 //        Dataservice dataservice = APIService.getService();
@@ -283,6 +283,8 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
 //            }
 //        });
     }
+
+
 
     private void AnhXa() {
         toolbar = findViewById(R.id.toolbardanhsachbaihat);

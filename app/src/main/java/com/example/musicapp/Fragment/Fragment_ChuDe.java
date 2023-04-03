@@ -18,6 +18,8 @@ import com.example.musicapp.Adapter.PhoBienAdapter;
 import com.example.musicapp.Model.ChuDeModel;
 import com.example.musicapp.Model.PhoBienModel;
 import com.example.musicapp.R;
+import com.example.musicapp.Service_API.APIService;
+import com.example.musicapp.Service_API.Dataservice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,15 +47,24 @@ public class Fragment_ChuDe extends Fragment {
     }
 
     private void GetData() {
-        chuDeAdapter = new ChuDeAdapter(getActivity(), mangchude);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerViewChuDe.setLayoutManager(linearLayoutManager);
-        recyclerViewChuDe.setAdapter(chuDeAdapter);
-        mangchude.add(new ChuDeModel("PB01","Best of Chillies","https://i.scdn.co/image/ab67706c0000da84063dac83fe6ab9f4e676c089"));
-        mangchude.add(new ChuDeModel("PB02","Nhac Hoa","https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/1/9/f/7/19f7601ee9899da6f07de343c4165e73.jpg"));
-        mangchude.add(new ChuDeModel("PB03","Trung Quan Idol","https://icdn.dantri.com.vn/thumb_w/770/2022/05/03/ca-si-trung-quan-1651574722985.png"));
-        chuDeAdapter.notifyDataSetChanged();
+        Dataservice dataservice = APIService.getService();
+        Call<List<ChuDeModel>> callback = dataservice.GetChuDeCurrent();
+        callback.enqueue(new Callback<List<ChuDeModel>>() {
+            @Override
+            public void onResponse(Call<List<ChuDeModel>> call, Response<List<ChuDeModel>> response) {
+                ArrayList<ChuDeModel> mangchude = (ArrayList<ChuDeModel>) response.body();
+                chuDeAdapter = new ChuDeAdapter(getActivity(), mangchude);
 
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                recyclerViewChuDe.setLayoutManager(linearLayoutManager);
+                recyclerViewChuDe.setAdapter(chuDeAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<ChuDeModel>> call, Throwable t) {
+
+            }
+        });
     }
 }

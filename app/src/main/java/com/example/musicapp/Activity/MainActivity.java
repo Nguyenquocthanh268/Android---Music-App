@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         mainViewPagerAdapter.addFragment(new Fragment_TrangChu(),"");
         mainViewPagerAdapter.addFragment(new Fragment_Search(),"");
         mainViewPagerAdapter.addFragment(new Fragment_Thu_Vien(),"");
-//        mainViewPagerAdapter.addFragment(new Fragment_TrangChu(),"");
         viewPager.setAdapter(mainViewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.baseline_home_24);
