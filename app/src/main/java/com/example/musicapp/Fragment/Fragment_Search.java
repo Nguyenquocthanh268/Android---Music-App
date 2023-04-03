@@ -18,20 +18,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.musicapp.Adapter.TimKiemAdapter;
+import com.example.musicapp.Model.BaiHatModel;
 import com.example.musicapp.R;
+import com.example.musicapp.Service_API.APIService;
+import com.example.musicapp.Service_API.Dataservice;
 
-//import com.example.btl_music4b.Adapter.TimKiemAdapter;
-//import com.example.btl_music4b.Model.BaiHatModel;
-//import com.example.btl_music4b.R;
-//import com.example.btl_music4b.Service_API.APIService;
-//import com.example.btl_music4b.Service_API.Dataservice;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import retrofit2.Call;
-//import retrofit2.Callback;
-//import retrofit2.Response;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Fragment_Search extends Fragment {
 
@@ -39,8 +37,8 @@ public class Fragment_Search extends Fragment {
     androidx.appcompat.widget.Toolbar toolbar;
     RecyclerView recyclerViewtim;
     TextView textViewnull;
-//    TimKiemAdapter timKiemAdapter;
-//    ArrayList<BaiHatModel> mangbaihat;
+    TimKiemAdapter timKiemAdapter;
+    ArrayList<BaiHatModel> mangbaihat;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,9 +66,9 @@ public class Fragment_Search extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                recyclerViewtim.setBackgroundColor(Color.BLACK);
+              recyclerViewtim.setBackgroundColor(Color.BLACK);
                 if (!s.trim().equals("")){
-//                    TimKiemBaiHat(s);
+                    TimKiemBaiHat(s);
                 }
                 return true;
             }
@@ -78,31 +76,31 @@ public class Fragment_Search extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-//    private void TimKiemBaiHat(String query){
-//        Dataservice dataservice = APIService.getService();
-//        Call<List<BaiHatModel>> callback = dataservice.GetTimKiembaihat(query);
-//        callback.enqueue(new Callback<List<BaiHatModel>>() {
-//            @Override
-//            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
-//                mangbaihat = (ArrayList<BaiHatModel>) response.body();
-//                if (mangbaihat.size() > 0){
-//                    timKiemAdapter = new TimKiemAdapter(getActivity(), mangbaihat);
-//                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-//                    recyclerViewtim.setLayoutManager(linearLayoutManager);
-//                    recyclerViewtim.setAdapter(timKiemAdapter);
-//                    textViewnull.setVisibility(View.GONE);
-//                    recyclerViewtim.setVisibility(View.VISIBLE);
-//                }else {
-//                    recyclerViewtim.setVisibility(View.GONE);
-//                    textViewnull.setVisibility(View.VISIBLE);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
-//
-//            }
-//        });
-//    }
+    private void TimKiemBaiHat(String query){
+        Dataservice dataservice = APIService.getService();
+        Call<List<BaiHatModel>> callback = dataservice.GetTimKiembaihat(query);
+        callback.enqueue(new Callback<List<BaiHatModel>>() {
+            @Override
+            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
+                mangbaihat = (ArrayList<BaiHatModel>) response.body();
+                if (mangbaihat.size() > 0){
+                    timKiemAdapter = new TimKiemAdapter(getActivity(), mangbaihat);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                    recyclerViewtim.setLayoutManager(linearLayoutManager);
+                    recyclerViewtim.setAdapter(timKiemAdapter);
+                    textViewnull.setVisibility(View.GONE);
+                    recyclerViewtim.setVisibility(View.VISIBLE);
+                }else {
+                    recyclerViewtim.setVisibility(View.GONE);
+                    textViewnull.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
+
+            }
+        });
+    }
 
 }
