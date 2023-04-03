@@ -10,7 +10,7 @@ public class PlaylistModel implements Serializable {
     @SerializedName("IdPlaylist")
     @Expose
     private String idPlaylist;
-    @SerializedName("Ten")
+    @SerializedName("TenPlaylist")
     @Expose
     private String ten;
     @SerializedName("HinhPlaylist")

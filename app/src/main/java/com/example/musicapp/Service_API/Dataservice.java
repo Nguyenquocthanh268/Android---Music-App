@@ -1,6 +1,5 @@
 package com.example.musicapp.Service_API;
 
-
 import com.example.musicapp.Model.BaiHatModel;
 //import com.example.musicapp.Model.BaiHatThuVienPlayListModel;
 //import com.example.musicapp.Model.BaiHatYeuThichModel;
@@ -14,7 +13,6 @@ import com.example.musicapp.Model.PlaylistModel;
 //import com.example.musicapp.Model.ResponseModel;
 import com.example.musicapp.Model.ThinhHanhModel;
 import com.example.musicapp.Model.ThuVienPlayListModel;
-
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,10 +36,10 @@ public interface Dataservice {
 
 
 
-    @GET("playlistcurrentday.php")
+    @GET("playlistforcurrentday.php")
     Call<List<PlaylistModel>> GetPlaylistCurrentDay();
 
-    @GET("nghesicurrent.php")
+    @GET("nghesiforcurrentday.php")
     Call<List<NgheSiModel>> GetNgheSiCurrent();
 
     @GET("thinhhanhcurrent.php")
