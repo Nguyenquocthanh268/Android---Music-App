@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -18,7 +19,6 @@ import com.example.musicapp.Model.BaiHatModel;
 import com.example.musicapp.R;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class PlayNhacActivity extends AppCompatActivity {
 
@@ -33,6 +33,7 @@ public class PlayNhacActivity extends AppCompatActivity {
     public static ArrayList<BaiHatModel> mangbaihat = new ArrayList<>();
 
     private Fragment_dia_nhac fragment_dia_nhac;
+    ViewPager viewPagerplaynhac;
     private Fragment_PlayNhac_Playlist fragment_playNhac_playlist;
     public static ViewPagerDiaNhac adapternhac;
     @Override
@@ -67,7 +68,7 @@ public class PlayNhacActivity extends AppCompatActivity {
     private void AnhXa() {
         toolbarplaynhac = findViewById(R.id.toolbarplaynhac);
         seekBarnhac = findViewById(R.id.seekBartime);
-        ViewPager viewPagerplaynhac = findViewById(R.id.viewPagerdianhac);
+        viewPagerplaynhac = findViewById(R.id.viewPagerdianhac);
         imageViewtim = findViewById(R.id.imageViewtimplaynhac);
         imageButtontronnhac = findViewById(R.id.imageButtontron);
         imageButtonpreviewnhac = findViewById(R.id.imageButtonpreview);
@@ -79,16 +80,24 @@ public class PlayNhacActivity extends AppCompatActivity {
         textViewtennhac = findViewById(R.id.textViewtenbaihatplaynhac);
         textViewrunrime = findViewById(R.id.textViewruntime);
         fragment_dia_nhac = new Fragment_dia_nhac();
-//        fragment_playNhac_playlist = new Fragment_PlayNhac_Playlist();
+        fragment_playNhac_playlist = new Fragment_PlayNhac_Playlist();
+
+        setSupportActionBar(toolbarplaynhac);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbarplaynhac.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        toolbarplaynhac.setTitleTextColor(Color.BLACK);
+
         adapternhac = new ViewPagerDiaNhac(getSupportFragmentManager());
         adapternhac.AddFragment(fragment_dia_nhac);
-//        adapternhac.AddFragment(fragment_playNhac_playlist);
+        adapternhac.AddFragment(fragment_playNhac_playlist);
         viewPagerplaynhac.setAdapter(adapternhac);
-        setSupportActionBar(toolbarplaynhac);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        toolbarplaynhac.setTitleTextColor(Color.BLACK);
-        fragment_dia_nhac = (Fragment_dia_nhac) adapternhac.getItem(position);
-//        fragment_playNhac_playlist = (Fragment_PlayNhac_Playlist) adapternhac.getItem(position);
+//       fragment_dia_nhac = (Fragment_dia_nhac) adapternhac.getItem(position);
+//       fragment_playNhac_playlist = (Fragment_PlayNhac_Playlist) adapternhac.getItem(position);
 
     }
 }

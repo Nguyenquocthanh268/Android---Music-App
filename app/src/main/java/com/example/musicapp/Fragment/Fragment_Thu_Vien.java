@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 
+import com.example.musicapp.Activity.MainActivity;
 import com.example.musicapp.Adapter.ViewPagerThuVien;
 import com.example.musicapp.R;
 import com.google.android.material.tabs.TabLayout;
@@ -37,6 +38,7 @@ public class Fragment_Thu_Vien extends Fragment implements Dialog_insert_thu_vie
     CircleImageView imguser;
     ProgressDialog progressDialog;
     View view;
+    MainActivity hm;
     private String tenThuVien;
 //    private HomeActivity hm;
     @Nullable
@@ -54,6 +56,7 @@ public class Fragment_Thu_Vien extends Fragment implements Dialog_insert_thu_vie
         return  view;
     }
     private void init() {
+        hm = (MainActivity) getActivity();
         ViewPagerThuVien viewPagerThuVien = new ViewPagerThuVien(getChildFragmentManager());
         viewPagerThuVien.addFragment(new Fragment_ThuVien_Playlist(), "Playlist");
         viewPagerThuVien.addFragment(new Fragment_ThuVien_NgheSi(), "Nghệ sĩ");
