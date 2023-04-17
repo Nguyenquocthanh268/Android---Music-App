@@ -38,7 +38,6 @@ public class Fragment_NgheSi extends Fragment {
         view = inflater.inflate(R.layout.fragment_nghesi, container, false);
         recyclerViewNgheSi = view.findViewById(R.id.recyclerviewnghesi);
         tenNgheSi = view.findViewById(R.id.txtnghesi);
-        mangnghesi = new ArrayList<NgheSiModel>();
         GetData();
         return view;
     }

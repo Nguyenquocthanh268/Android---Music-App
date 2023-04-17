@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.musicapp.Activity.PlayNhacActivity;
 import com.example.musicapp.Model.BaiHatModel;
 import com.example.musicapp.R;
 import com.squareup.picasso.Picasso;
@@ -61,14 +62,14 @@ public class TimKiemAdapter extends RecyclerView.Adapter<TimKiemAdapter.ViewHold
             txtcasitimkiem = itemView.findViewById(R.id.txtcasinhac);
             imganhtimkiem = itemView.findViewById(R.id.imgnhac);
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(context, PlayNhacActivity.class);
-//                     intent.putExtra("cakhuc", mangbaihat.get(getPosition()));
-//                     context.startActivity(intent);
-//                }
-//            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, PlayNhacActivity.class);
+                     intent.putExtra("cakhuc", mangbaihat.get(getPosition()));
+                     context.startActivity(intent);
+                }
+            });
 
         }
     }

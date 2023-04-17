@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.musicapp.Activity.DanhsachbaihatActivity;
 import com.example.musicapp.Model.ThinhHanhModel;
 import com.example.musicapp.R;
 import com.squareup.picasso.Picasso;
@@ -43,6 +44,9 @@ public class ThinhHanhAdapter extends RecyclerView.Adapter<ThinhHanhAdapter.View
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+                intent.putExtra("intentthinhhanh", mangthinhhanh.get(position));
+                context.startActivity(intent);
             }
         });
     }
