@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.musicapp.Activity.DanhsachbaihatActivity;
 import com.example.musicapp.Model.NgheSiModel;
 import com.example.musicapp.Model.PlaylistModel;
 import com.example.musicapp.R;
@@ -29,7 +30,7 @@ public class NgheSiAdapter  extends RecyclerView.Adapter<NgheSiAdapter.ViewHolde
 
     @NonNull
     @Override
-    public NgheSiAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         view = inflater.inflate(R.layout.item_nghesi,parent, false);
         return new ViewHolder(view);
@@ -43,6 +44,10 @@ public class NgheSiAdapter  extends RecyclerView.Adapter<NgheSiAdapter.ViewHolde
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+                intent.putExtra("intentnghesi",mangnghesi.get(position));
+                context.startActivity(intent);
+
             }
         });
     }

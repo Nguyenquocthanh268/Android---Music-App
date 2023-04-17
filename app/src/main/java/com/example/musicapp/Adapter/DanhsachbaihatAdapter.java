@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAdapter.ViewHolder>{
 
     Context context;
+    View view;
     ArrayList<BaiHatModel> mangbaihat;
 
     public DanhsachbaihatAdapter(Context context, ArrayList<BaiHatModel> mangbaihat) {
@@ -32,7 +33,7 @@ public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAd
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_danh_sach_bai_hat, parent, false);
+        view = inflater.inflate(R.layout.item_danh_sach_bai_hat, parent, false);
         return new ViewHolder(view);
     }
 
@@ -42,6 +43,7 @@ public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAd
         holder.txttenbaihat.setText(baiHat.getTenBaiHat());
         holder.txttencasi.setText(baiHat.getTenCaSi());
         Picasso.get().load(baiHat.getHinhBaiHat()).into(holder.hinhbaihat);
+
     }
 
     @Override
@@ -58,16 +60,18 @@ public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAd
             txttencasi = itemView.findViewById(R.id.textViewtencasi);
             hinhbaihat = itemView.findViewById(R.id.imageViewhinhbaihat);
             tim = itemView.findViewById(R.id.imageViewtimdanhsachbaihat);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, PlayNhacActivity.class);
-                    intent.putExtra("cakhuc", mangbaihat.get(getAdapterPosition()));
+                    intent.putExtra("cakhuc", mangbaihat.get(getPosition()));
                     context.startActivity(intent);
 
                 }
             });
+
         }
+
+
     }
 }
