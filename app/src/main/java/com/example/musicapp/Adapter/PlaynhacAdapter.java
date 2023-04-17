@@ -30,7 +30,7 @@ public class PlaynhacAdapter extends  RecyclerView.Adapter<PlaynhacAdapter.ViewH
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        view = inflater.inflate(R.layout.fragment_playnhac_playlist, parent, false);
+        view = inflater.inflate(R.layout.item_playbaihat, parent, false);
         return new ViewHolder(view);
     }
 
@@ -39,7 +39,7 @@ public class PlaynhacAdapter extends  RecyclerView.Adapter<PlaynhacAdapter.ViewH
         BaiHatModel baiHat = mangbaihat.get(position);
         holder.txttenbaihat.setText(baiHat.getTenBaiHat());
         holder.txtcasi.setText(baiHat.getTenCaSi());
-        Picasso.get().load(baiHat.getHinhBaiHat()).into(holder.img);
+        holder.txtindex.setText(position+1+"");
     }
 
     @Override
@@ -48,11 +48,11 @@ public class PlaynhacAdapter extends  RecyclerView.Adapter<PlaynhacAdapter.ViewH
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView img;
-        TextView txtcasi,txttenbaihat;
+
+        TextView txtcasi,txttenbaihat,txtindex;
         public ViewHolder(View itemView){
             super(itemView);
-            img = itemView.findViewById(R.id.img_playnhac);
+            txtindex = itemView.findViewById(R.id.txtindex_playnhac);
             txtcasi = itemView.findViewById(R.id.txtcasi_playnhac);
             txttenbaihat = itemView.findViewById(R.id.txtten_playnhac);
         }
