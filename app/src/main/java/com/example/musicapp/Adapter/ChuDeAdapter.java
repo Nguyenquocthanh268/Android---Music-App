@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.musicapp.Activity.DanhsachbaihatActivity;
 import com.example.musicapp.Model.ChuDeModel;
 import com.example.musicapp.R;
 import com.squareup.picasso.Picasso;
@@ -41,14 +42,14 @@ public class ChuDeAdapter extends RecyclerView.Adapter<ChuDeAdapter.ViewHolder>{
         ChuDeModel chuDe = mangchude.get(position);
         holder.txttenchude.setText(chuDe.getTenChuDe());
         Picasso.get(/*context*/).load(chuDe.getHinhChuDe()).into(holder.imgchude);
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, DanhsachbaihatActivity.class);
-//                intent.putExtra("intentchude", mangchude.get(position));
-//                context.startActivity(intent);
-//            }
-//        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+                intent.putExtra("intentchude", mangchude.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

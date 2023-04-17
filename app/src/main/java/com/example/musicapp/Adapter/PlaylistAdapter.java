@@ -1,6 +1,7 @@
 package com.example.musicapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.musicapp.Activity.DanhsachbaihatActivity;
 import com.example.musicapp.Model.PlaylistModel;
 import com.example.musicapp.R;
 import com.squareup.picasso.Picasso;
@@ -41,6 +43,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+                intent.putExtra("intentplaylist", mangplaylist.get(position));
+                context.startActivity(intent);
+
             }
         });
     }

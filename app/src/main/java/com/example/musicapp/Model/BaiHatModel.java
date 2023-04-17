@@ -10,7 +10,7 @@ public class BaiHatModel implements Parcelable {
     @SerializedName("IdBaiHat")
     @Expose
     private int idBaiHat;
-    @SerializedName("TenBaiHat")
+    @SerializedName("TenBaihat")
     @Expose
     private String tenBaiHat;
     @SerializedName("HinhBaiHat")

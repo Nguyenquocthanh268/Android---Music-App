@@ -1,8 +1,8 @@
 package com.example.musicapp.Activity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,22 +13,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+
 import com.example.musicapp.Adapter.DanhsachbaihatAdapter;
-//import com.example.musicapp.Adapter.dsbhthuvienplaylistAdapter;
 import com.example.musicapp.Model.BaiHatModel;
-//import com.example.musicapp.Model.BaiHatThuVienPlayListModel;
 import com.example.musicapp.Model.BangXepHangModel;
 import com.example.musicapp.Model.ChuDeModel;
 import com.example.musicapp.Model.NgheSiModel;
 import com.example.musicapp.Model.PhoBienModel;
 import com.example.musicapp.Model.PlaylistModel;
 import com.example.musicapp.Model.ThinhHanhModel;
-//import com.example.musicapp.Model.ThuVienPlayListModel;
 import com.example.musicapp.R;
 import com.example.musicapp.Service_API.APIService;
 import com.example.musicapp.Service_API.Dataservice;
-import com.example.musicapp.Model.NgheSiModel;
-import com.example.musicapp.Model.PlaylistModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
@@ -50,12 +46,12 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     ThinhHanhModel thinhHanh = null;
     ChuDeModel chuDe = null;
     BangXepHangModel bangXepHang = null;
-//    ThuVienPlayListModel thuVienPlayList = null;
+
     ImageView imgdanhsachcakhuc;
     ArrayList<BaiHatModel> mangbaihat;
-//    ArrayList<BaiHatThuVienPlayListModel> mangbaihatthuvienplaylist;
+
     DanhsachbaihatAdapter danhsachbaihatAdapter;
-//    dsbhthuvienplaylistAdapter dsbhthuvienplaylistadapter;
+
     ImageView btnThemnhac;
     SwipeRefreshLayout swipeRefreshLayout;
     private int id;
@@ -106,64 +102,34 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(bangXepHang.getTenBangXepHang());
         }
 
+
         floatActionButtonClick();
-        btnThemnhac.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = getIntent();
-                if(intent.hasExtra("idthuvienplaylist")){
-//                    intent = new Intent(DanhsachbaihatActivity.this, InsertNhacThuVienActivity.class);
-//                    intent.putExtra("id", id);
-                    startActivity(intent);
-                }
-            }
-        });
 
-        swipeRefreshLayout = findViewById(R.id.swipedanhsachbaihat);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Intent intent = getIntent();
-                if(intent.hasExtra("idthuvienplaylist")){
-//                    GetDataThuVienPlayList(String.valueOf(thuVienPlayList.getIDThuVienPlayList()), false);
-//                    dsbhthuvienplaylistadapter.notifyDataSetChanged();
-                }
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
 
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        if (thuVienPlayList != null && !thuVienPlayList.equals("")){
-//            GetDataThuVienPlayList(String.valueOf(thuVienPlayList.getIDThuVienPlayList()), true);
-//            txtcollapsing.setText(thuVienPlayList.getTenThuVienPlayList());
-//            getSupportActionBar().setTitle(thuVienPlayList.getTenThuVienPlayList());
-//        }
+
     }
 
     private void setValueInView(String hinh) {
         Picasso.get().load(hinh).into(imgdanhsachcakhuc);
     }
     private void GetDataPlaylist(String id) {
-//        Dataservice dataservice = APIService.getService();
-//        Call<List<BaiHatModel>> callback = dataservice.GetDanhsachbaihatplaylist(id);
-//        callback.enqueue(new Callback<List<BaiHatModel>>() {
-//            @Override
-//            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
-//                mangbaihat = (ArrayList<BaiHatModel>) response.body();
-//                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
-//                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
-//                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
-//
-//            }
-//        });
+        Dataservice dataservice = APIService.getService();
+        Call<List<BaiHatModel>> callback = dataservice.GetDanhsachbaihatplaylist(id);
+        callback.enqueue(new Callback<List<BaiHatModel>>() {
+            @Override
+            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
+                mangbaihat = (ArrayList<BaiHatModel>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
+
+            }
+        });
     }
     private void GetDataBangXepHang(String id) {
         Dataservice dataservice = APIService.getService();
@@ -202,88 +168,60 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         });
     }
     private void GetDataNgheSi(String id) {
-//        Dataservice dataservice = APIService.getService();
-//        Call<List<BaiHatModel>> callback = dataservice.GetDanhsachbaihatnghesi(id);
-//        callback.enqueue(new Callback<List<BaiHatModel>>() {
-//            @Override
-//            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
-//                mangbaihat = (ArrayList<BaiHatModel>) response.body();
-//                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
-//                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
-//                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
-//
-//            }
-//        });
+        Dataservice dataservice = APIService.getService();
+        Call<List<BaiHatModel>> callback = dataservice.GetDanhsachbaihatnghesi(id);
+        callback.enqueue(new Callback<List<BaiHatModel>>() {
+            @Override
+            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
+                mangbaihat = (ArrayList<BaiHatModel>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void GetDataPhoBien(String id) {
-//        Dataservice dataservice = APIService.getService();
-//        Call<List<BaiHatModel>> callback = dataservice.GetDanhsachbaihatphobien(id);
-//        callback.enqueue(new Callback<List<BaiHatModel>>() {
-//            @Override
-//            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
-//                mangbaihat = (ArrayList<BaiHatModel>) response.body();
-//                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
-//                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
-//                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
-//
-//            }
-//        });
+        Dataservice dataservice = APIService.getService();
+        Call<List<BaiHatModel>> callback = dataservice.GetDanhsachbaihatphobien(id);
+        callback.enqueue(new Callback<List<BaiHatModel>>() {
+            @Override
+            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
+                mangbaihat = (ArrayList<BaiHatModel>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
+
+            }
+        });
     }
     private void GetDataThinhHanh(String id) {
-//        Dataservice dataservice = APIService.getService();
-//        Call<List<BaiHatModel>> callback = dataservice.GetDanhsachbaihatthinhhanh(id);
-//        callback.enqueue(new Callback<List<BaiHatModel>>() {
-//            @Override
-//            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
-//                mangbaihat = (ArrayList<BaiHatModel>) response.body();
-//                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
-//                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
-//                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
-//
-//            }
-//        });
-    }
-    private void GetDataThuVienPlayList(String id, boolean updateImage) {
-//        Dataservice dataservice = APIService.getService();
-//        Call<List<BaiHatThuVienPlayListModel>> callback = dataservice.GetDanhsachbaihatthuvienplaylist(id);
-//        callback.enqueue(new Callback<List<BaiHatThuVienPlayListModel>>() {
-//            @Override
-//            public void onResponse(Call<List<BaiHatThuVienPlayListModel>> call, Response<List<BaiHatThuVienPlayListModel>> response) {
-//                mangbaihatthuvienplaylist = (ArrayList<BaiHatThuVienPlayListModel>) response.body();
-//                if (updateImage && mangbaihatthuvienplaylist.size() > 0){
-//                    setValueInView(mangbaihatthuvienplaylist.get(mangbaihatthuvienplaylist.size() -1).getHinhBaiHat());
-//                }
-//                dsbhthuvienplaylistadapter = new dsbhthuvienplaylistAdapter(DanhsachbaihatActivity.this, mangbaihatthuvienplaylist, new dsbhthuvienplaylistAdapter.active() {
-//                    @Override
-//                    public void statusDelete(Boolean status, String urlImage) {
-//                        setValueInView(urlImage);
-//                        dsbhthuvienplaylistadapter.notifyDataSetChanged();
-//                    }
-//                });
-//                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
-//                recyclerViewdanhsachbaihat.setAdapter(dsbhthuvienplaylistadapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<BaiHatThuVienPlayListModel>> call, Throwable t) {
-//
-//            }
-//        });
-    }
+        Dataservice dataservice = APIService.getService();
+        Call<List<BaiHatModel>> callback = dataservice.GetDanhsachbaihatthinhhanh(id);
+        callback.enqueue(new Callback<List<BaiHatModel>>() {
+            @Override
+            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
+                mangbaihat = (ArrayList<BaiHatModel>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+            }
 
+            @Override
+            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
+
+            }
+        });
+    }
 
 
     private void AnhXa() {
@@ -326,28 +264,30 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             }else
             if (intent.hasExtra("intentbangxephang")){
                 bangXepHang = (BangXepHangModel) intent.getSerializableExtra("intentbangxephang");
-            }else
-            if(intent.hasExtra("idthuvienplaylist")){
+            }
+//            else
+//            if(intent.hasExtra("idthuvienplaylist")){
 //                thuVienPlayList = (ThuVienPlayListModel) intent.getSerializableExtra("idthuvienplaylist");
 //                id = thuVienPlayList.getIDThuVienPlayList();
 //                btnThemnhac.setVisibility(View.VISIBLE);
-            }
+//            }
         }
     }
     private void floatActionButtonClick(){
-//        floatingActionButton.setEnabled(true);
-//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(DanhsachbaihatActivity.this, PlayNhacActivity.class);
-//                if (mangbaihat!=null){
-//                    if (mangbaihat.size() > 0){
-//                        intent.putExtra("cacbaihat", mangbaihat);
-//                        startActivity(intent);
-//                    }else {
-//                        Toast.makeText(DanhsachbaihatActivity.this, "Danh sách không có bài hát nào cả :(", Toast.LENGTH_SHORT).show();
-//                    }
-//                }else{
+        floatingActionButton.setEnabled(true);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DanhsachbaihatActivity.this, PlayNhacActivity.class);
+                if (mangbaihat!=null){
+                    if (mangbaihat.size() > 0){
+                        intent.putExtra("cacbaihat", mangbaihat);
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(DanhsachbaihatActivity.this, "Danh sách không có bài hát nào cả :(", Toast.LENGTH_SHORT).show();
+                    }
+                }
+//                else{
 //                    if (mangbaihatthuvienplaylist != null){
 //                        if (mangbaihatthuvienplaylist.size() > 0){
 //                            intent.putExtra("cacbaihatthuvien", mangbaihatthuvienplaylist);
@@ -357,7 +297,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
 //                        }
 //                    }
 //                }
-//            }
-//        });
+            }
+        });
     }
 }
