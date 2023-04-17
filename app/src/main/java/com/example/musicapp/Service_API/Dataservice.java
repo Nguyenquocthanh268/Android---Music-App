@@ -8,9 +8,12 @@ import com.example.musicapp.Model.ChuDeModel;
 import com.example.musicapp.Model.NgheSiModel;
 //import com.example.musicapp.Model.NguoiDungModel;
 //import com.example.musicapp.Model.PhanHoiDangKyModel;
+import com.example.musicapp.Model.NguoiDungModel;
+import com.example.musicapp.Model.PhanHoiDangKyModel;
 import com.example.musicapp.Model.PhoBienModel;
 import com.example.musicapp.Model.PlaylistModel;
 //import com.example.musicapp.Model.ResponseModel;
+import com.example.musicapp.Model.ResponseModel;
 import com.example.musicapp.Model.ThinhHanhModel;
 import com.example.musicapp.Model.ThuVienPlayListModel;
 
@@ -82,6 +85,19 @@ public interface Dataservice {
     @POST("danhsachbaihat.php")
     Call<List<BaiHatModel>> GetDanhsachbaihatbangxephang(@Field("idbangxephang") String id);
 
+    @FormUrlEncoded
+    @POST("dangnhap.php")
+    Call<ResponseModel> login(@Field("taikhoan") String taikhoan, @Field("matkhau") String matkhau);
 
+    @FormUrlEncoded
+    @POST("getthongtinnguoidung.php")
+    Call<List<NguoiDungModel>> thongtinnguoidung(@Field("username") String username);
 
+    @FormUrlEncoded
+    @POST("dangky.php")
+    Call<PhanHoiDangKyModel> register(@FieldMap HashMap<String, String> params);
+
+    @FormUrlEncoded
+    @POST("checkusername.php")
+    Call<ResponseModel> checkusername(@Field("username") String username);
 }

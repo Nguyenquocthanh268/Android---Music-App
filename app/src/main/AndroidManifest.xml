@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.musicapp" >
-
+    package="com.example.musicapp">
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -10,11 +9,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-
+        android:theme="@style/AppTheme">
         <activity
-            android:name=".Activity.MainActivity"
-            android:exported="true" >
+            android:name=".Activity.DangKyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.KhoiDongActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,6 +24,15 @@
         </activity>
         <activity android:name=".Activity.DanhsachbaihatActivity" />
         <activity android:name=".Activity.PlayNhacActivity" />
+
+        <activity
+            android:name=".Activity.DangNhapActivity"
+            android:exported="true"
+            android:label="@string/title_activity_dang_nhap"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.MainActivity"
+            android:exported="true"></activity>
 
         <meta-data
             android:name="preloaded_fonts_provider_class"
