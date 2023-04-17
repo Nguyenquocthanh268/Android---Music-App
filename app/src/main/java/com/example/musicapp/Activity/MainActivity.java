@@ -3,8 +3,12 @@ package com.example.musicapp.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
 import com.example.musicapp.Adapter.MainViewPagerAdapter;
 import com.example.musicapp.Fragment.Fragment_Search;
@@ -15,12 +19,20 @@ import com.example.musicapp.R;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
+    private SQLiteDatabase db;
     TabLayout tabLayout;
     ViewPager viewPager;
+    private String taikhoan, matkhau, name, email, url;
+    private long backPressTime;
+    private Toast mToast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db = openOrCreateDatabase("NguoiDung.db", MODE_PRIVATE, null);
+        getData();
+
         final LoadingDialog loadingDialog = new LoadingDialog(MainActivity.this);
 
         anhxa();
@@ -34,6 +46,23 @@ public class MainActivity extends AppCompatActivity {
         }, 7500);
         init();
         overridePendingTransition(R.anim.anim_intent_in_home, R.anim.anim_intent_out);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressTime + 2000 > System.currentTimeMillis()){
+            mToast.cancel();
+//            Intent intent = new Intent(getApplicationContext(), KhoiDongActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            intent.putExtra("EXIT", true);
+//            startActivity(intent);
+            finish();
+            System.exit(0);
+        }else {
+//            mToast = Toast.makeText(HomeActivity.this, "Ấn lần nữa để thoát", Toast.LENGTH_SHORT);
+            mToast.show();
+        }
+        backPressTime = System.currentTimeMillis();
     }
     private void init()
     {
