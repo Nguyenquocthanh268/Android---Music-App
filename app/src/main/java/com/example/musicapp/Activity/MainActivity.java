@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import com.example.musicapp.Adapter.MainViewPagerAdapter;
+import com.example.musicapp.Fragment.Fragment_Profile;
 import com.example.musicapp.Fragment.Fragment_Search;
 import com.example.musicapp.Fragment.Fragment_Thu_Vien;
 import com.example.musicapp.Fragment.Fragment_TrangChu;
@@ -70,12 +71,13 @@ public class MainActivity extends AppCompatActivity {
         mainViewPagerAdapter.addFragment(new Fragment_TrangChu(),"");
         mainViewPagerAdapter.addFragment(new Fragment_Search(),"");
         mainViewPagerAdapter.addFragment(new Fragment_Thu_Vien(),"");
+        mainViewPagerAdapter.addFragment(new Fragment_Profile(),"");
         viewPager.setAdapter(mainViewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.baseline_home_24);
         tabLayout.getTabAt(1).setIcon(R.drawable.icontimkiem);
         tabLayout.getTabAt(2).setIcon(R.drawable.iconthuvien);
-//        tabLayout.getTabAt(3).setIcon(R.drawable.iconlogo);
+        tabLayout.getTabAt(3).setIcon(R.drawable.iconlogo);
     }
     public void anhxa()
     {
@@ -84,15 +86,19 @@ public class MainActivity extends AppCompatActivity {
     }
     public void getData() {
         String sql = "SELECT * FROM tbNguoiDung";
-//        Cursor cursor = db.rawQuery(sql, null);
-//        cursor.moveToLast();
-//        if (!cursor.isAfterLast()){
-//            taikhoan = cursor.getString(1);
-//            matkhau = cursor.getString(2);
-//            name = cursor.getString(3);
-//            email = cursor.getString(4);
-//            url = cursor.getString(5);
-//        }
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToLast();
+        if (!cursor.isAfterLast()){
+            taikhoan = cursor.getString(1);
+            matkhau = cursor.getString(2);
+            name = cursor.getString(3);
+            email = cursor.getString(4);
+            url = cursor.getString(5);
+        }
+    }
+
+    public String getName() {
+        return name;
     }
 }
 

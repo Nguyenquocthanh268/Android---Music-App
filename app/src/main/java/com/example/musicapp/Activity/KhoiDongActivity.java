@@ -42,7 +42,7 @@ public class KhoiDongActivity extends AppCompatActivity {
             getData();
             overridePendingTransition(R.anim.anim_intent_in, R.anim.anim_intent_out);
             animation = AnimationUtils.loadAnimation(KhoiDongActivity.this, R.anim.anim_intent_in_main);
-            taikhoan =""; matkhau="";
+//            taikhoan =""; matkhau="";
 
             new Handler().postDelayed(new Runnable() {
                 @Override

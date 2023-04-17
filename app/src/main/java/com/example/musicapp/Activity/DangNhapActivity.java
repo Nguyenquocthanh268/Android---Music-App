@@ -44,7 +44,6 @@ public class DangNhapActivity extends AppCompatActivity {
     private SQLiteDatabase db;
     private TextInputLayout matkhau, taikhoan;
     private Button dangnhap;
-    private TextView qmk;
     private boolean accept = false;
     private String username, password, name, email, image;
     @Override
@@ -80,19 +79,8 @@ public class DangNhapActivity extends AppCompatActivity {
             }
         });
 
-        qmk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDialog();
-            }
-        });
-
     }
 
-    private void openDialog() {
-//        Intent intent = new Intent(DangNhapActivity.this, Dialog_Forget_Password.class);
-//        startActivity(intent);
-    }
 
     private void login() {
 
@@ -159,7 +147,7 @@ public class DangNhapActivity extends AppCompatActivity {
         taikhoan = findViewById(R.id.edttkdn);
         matkhau = findViewById(R.id.edtmkdn);
         dangnhap = findViewById(R.id.btndn);
-        qmk = findViewById(R.id.textViewquenmatkhau);
+
         toolbardangnhap = findViewById(R.id.toolbardangnhap);
         setSupportActionBar(toolbardangnhap);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
