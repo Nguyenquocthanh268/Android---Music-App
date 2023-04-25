@@ -31,6 +31,7 @@ import com.example.musicapp.Adapter.ViewPagerDiaNhac;
 import com.example.musicapp.Fragment.Fragment_PlayNhac_Playlist;
 import com.example.musicapp.Fragment.Fragment_dia_nhac;
 import com.example.musicapp.Model.BaiHatModel;
+import com.example.musicapp.Model.BaiHatThuVienPlayListModel;
 import com.example.musicapp.Model.BaiHatYeuThichModel;
 import com.example.musicapp.Model.ResponseModel;
 import com.example.musicapp.R;
@@ -67,6 +68,7 @@ public class PlayNhacActivity extends AppCompatActivity {
     ViewPager viewPagerplaynhac;
     private Fragment_PlayNhac_Playlist fragment_playNhac_playlist;
     public static ViewPagerDiaNhac adapternhac;
+    public static ArrayList<BaiHatThuVienPlayListModel> mangbaihetthuvienplaylist = new ArrayList<>();
     MediaPlayer mediaPlayer;
 
 
@@ -97,6 +99,7 @@ public class PlayNhacActivity extends AppCompatActivity {
         mangbaihat.clear();
 //        mangbaihetthuvienplaylist.clear();
         mangbaihatyeuthich.clear();
+        mangbaihetthuvienplaylist.clear();
         if (intent != null) {
             if (intent.hasExtra("cakhuc")) {
                 BaiHatModel baiHat = intent.getParcelableExtra("cakhuc");
@@ -104,10 +107,10 @@ public class PlayNhacActivity extends AppCompatActivity {
             } else if (intent.hasExtra("cacbaihat")) {
                 mangbaihat = intent.getParcelableArrayListExtra("cacbaihat");
             } else if (intent.hasExtra("cakhucthuvien")) {
-//                BaiHatThuVienPlayListModel baiHatThuVienPlayList = intent.getParcelableExtra("cakhucthuvien");
-//                mangbaihetthuvienplaylist.add(baiHatThuVienPlayList);
+                BaiHatThuVienPlayListModel baiHatThuVienPlayList = intent.getParcelableExtra("cakhucthuvien");
+                mangbaihetthuvienplaylist.add(baiHatThuVienPlayList);
             } else if (intent.hasExtra("cacbaihatthuvien")) {
-//                mangbaihetthuvienplaylist = intent.getParcelableArrayListExtra("cacbaihatthuvien");
+                mangbaihetthuvienplaylist = intent.getParcelableArrayListExtra("cacbaihatthuvien");
             } else if (intent.hasExtra(("cakhucyeuthich"))) {
                 BaiHatYeuThichModel baiHatYeuThichModel = intent.getParcelableExtra("cakhucyeuthich");
                 mangbaihatyeuthich.add(baiHatYeuThichModel);
@@ -168,6 +171,15 @@ public class PlayNhacActivity extends AppCompatActivity {
             checkYeuThich(taikhoan,mangbaihatyeuthich.get(0).getIdBaiHat());
             setGradient(mangbaihatyeuthich.get(0).getHinhBaiHat());
         }
+        if(mangbaihetthuvienplaylist.size() > 0){
+            getSupportActionBar().setTitle(mangbaihetthuvienplaylist.get(0).getTenBaiHat());
+            textViewcasi.setText(mangbaihetthuvienplaylist.get(0).getTenCaSi());
+            textViewtennhac.setText(mangbaihetthuvienplaylist.get(0).getTenBaiHat());
+            new playMP3().execute(mangbaihetthuvienplaylist.get(0).getLinkBaiHat());
+            imageButtonplaypausenhac.setImageResource(R.drawable.nutplay);
+            checkYeuThich(taikhoan,mangbaihetthuvienplaylist.get(0).getIdBaiHat());
+            setGradient(mangbaihetthuvienplaylist.get(0).getHinhBaiHat());
+        }
 
 //       fragment_playNhac_playlist = (Fragment_PlayNhac_Playlist) adapternhac.getItem(position);
 
@@ -184,6 +196,10 @@ public class PlayNhacActivity extends AppCompatActivity {
                     }
                     if(mangbaihatyeuthich.size()>0 ){
                         fragment_dia_nhac.PlayNhac(mangbaihatyeuthich.get(0).getHinhBaiHat());
+                        handler.removeCallbacks(this);
+                    }
+                    if(mangbaihetthuvienplaylist.size()>0){
+                        fragment_dia_nhac.PlayNhac(mangbaihetthuvienplaylist.get(0).getHinhBaiHat());
                         handler.removeCallbacks(this);
                     }
                     else {
@@ -352,6 +368,42 @@ public class PlayNhacActivity extends AppCompatActivity {
 //                        UpdateTime();
                     }
                 }
+                if ( mangbaihetthuvienplaylist.size() > 0){
+                    if (mediaPlayer.isPlaying() || mediaPlayer != null){
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                        mediaPlayer = null;
+                    }
+                    if( position < (mangbaihetthuvienplaylist.size())){
+                        imageButtonplaypausenhac.setImageResource(R.drawable.nutplay);
+                        position++;
+                        if(repeat == true){
+                            if(position == 0){
+                                position = mangbaihetthuvienplaylist.size();
+                            }
+                            position -=1;
+                        }
+                        if (checkrandom == true){
+                            Random random = new Random();
+                            int index = random.nextInt(mangbaihetthuvienplaylist.size());
+                            if(index == position){
+                                position = index - 1;
+                            }
+                            position = index ;
+                        }
+                        if (position > (mangbaihetthuvienplaylist.size()-1)){
+                            position =0 ;
+                        }
+                        new playMP3().execute(mangbaihetthuvienplaylist.get(position).getLinkBaiHat());
+                        fragment_dia_nhac.PlayNhac(mangbaihetthuvienplaylist.get(position).getHinhBaiHat());
+                        getSupportActionBar().setTitle(mangbaihetthuvienplaylist.get(position).getTenBaiHat());
+                        textViewcasi.setText(mangbaihetthuvienplaylist.get(position).getTenCaSi());
+                        textViewtennhac.setText(mangbaihetthuvienplaylist.get(position).getTenBaiHat());
+                        checkYeuThich(taikhoan,mangbaihetthuvienplaylist.get(position).getIdBaiHat());
+                        setGradient(mangbaihetthuvienplaylist.get(position).getHinhBaiHat());
+//                        UpdateTime();
+                    }
+                }
                 imageButtonlapnhac.setClickable(false);
                 imageButtonnexnhac.setClickable(false);
                 Handler handler1 = new Handler();
@@ -435,6 +487,41 @@ public class PlayNhacActivity extends AppCompatActivity {
                         textViewtennhac.setText(mangbaihatyeuthich.get(position).getTenBaiHat());
                         checkYeuThich(taikhoan,mangbaihatyeuthich.get(position).getIdBaiHat());
                         setGradient(mangbaihatyeuthich.get(position).getHinhBaiHat());
+//                        UpdateTime();
+                    }
+                }
+                if ( mangbaihetthuvienplaylist.size() > 0){
+                    if (mediaPlayer.isPlaying() || mediaPlayer != null){
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                        mediaPlayer = null;
+                    }
+                    if( position < (mangbaihetthuvienplaylist.size())){
+                        imageButtonplaypausenhac.setImageResource(R.drawable.nutplay);
+                        position--;
+                        if(position < 0){
+                            position = mangbaihetthuvienplaylist.size()-1;
+                        }
+                        if(repeat == true){
+
+                            position +=1;
+                        }
+                        if (checkrandom == true){
+                            Random random = new Random();
+                            int index = random.nextInt(mangbaihetthuvienplaylist.size());
+                            if(index == position){
+                                position = index - 1;
+                            }
+                            position = index ;
+                        }
+
+                        new playMP3().execute(mangbaihetthuvienplaylist.get(position).getLinkBaiHat());
+                        fragment_dia_nhac.PlayNhac(mangbaihetthuvienplaylist.get(position).getHinhBaiHat());
+                        getSupportActionBar().setTitle(mangbaihetthuvienplaylist.get(position).getTenBaiHat());
+                        textViewcasi.setText(mangbaihetthuvienplaylist.get(position).getTenCaSi());
+                        textViewtennhac.setText(mangbaihetthuvienplaylist.get(position).getTenBaiHat());
+                        checkYeuThich(taikhoan,mangbaihetthuvienplaylist.get(position).getIdBaiHat());
+                        setGradient(mangbaihetthuvienplaylist.get(position).getHinhBaiHat());
 //                        UpdateTime();
                     }
                 }
@@ -658,6 +745,37 @@ class playMP3 extends AsyncTask<String, Void, String> {
                             textViewtennhac.setText(mangbaihatyeuthich.get(position).getTenBaiHat());
                             checkYeuThich(taikhoan,mangbaihatyeuthich.get(position).getIdBaiHat());
                             setGradient(mangbaihatyeuthich.get(position).getHinhBaiHat());
+
+                        }
+                    }
+                    if(mangbaihetthuvienplaylist.size()>0){
+                        if( position < (mangbaihetthuvienplaylist.size())){
+                            imageButtonplaypausenhac.setImageResource(R.drawable.nutplay);
+                            position++;
+                            if(repeat == true){
+                                if(position == 0){
+                                    position = mangbaihetthuvienplaylist.size();
+                                }
+                                position -=1;
+                            }
+                            if (checkrandom == true){
+                                Random random = new Random();
+                                int index = random.nextInt(mangbaihetthuvienplaylist.size());
+                                if(index == position){
+                                    position = index - 1;
+                                }
+                                position = index ;
+                            }
+                            if (position > (mangbaihetthuvienplaylist.size()-1)){
+                                position =0 ;
+                            }
+                            new playMP3().execute(mangbaihetthuvienplaylist.get(position).getLinkBaiHat());
+                            fragment_dia_nhac.PlayNhac(mangbaihetthuvienplaylist.get(position).getHinhBaiHat());
+                            getSupportActionBar().setTitle(mangbaihetthuvienplaylist.get(position).getTenBaiHat());
+                            textViewcasi.setText(mangbaihetthuvienplaylist.get(position).getTenCaSi());
+                            textViewtennhac.setText(mangbaihetthuvienplaylist.get(position).getTenBaiHat());
+                            checkYeuThich(taikhoan,mangbaihetthuvienplaylist.get(position).getIdBaiHat());
+                            setGradient(mangbaihetthuvienplaylist.get(position).getHinhBaiHat());
 
                         }
                     }

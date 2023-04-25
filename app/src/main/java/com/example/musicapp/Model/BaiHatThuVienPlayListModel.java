@@ -20,7 +20,7 @@ public class BaiHatThuVienPlayListModel implements Parcelable {
     @Expose
     private int idBaiHat;
 
-    @SerializedName("TenBaiHat")
+    @SerializedName("TenBaihat")
     @Expose
     private String tenBaiHat;
 

@@ -1,6 +1,7 @@
 package com.example.musicapp.Service_API;
 
 import com.example.musicapp.Model.BaiHatModel;
+import com.example.musicapp.Model.BaiHatThuVienPlayListModel;
 import com.example.musicapp.Model.BaiHatYeuThichModel;
 import com.example.musicapp.Model.BangXepHangModel;
 import com.example.musicapp.Model.ChuDeModel;
@@ -114,4 +115,18 @@ public interface Dataservice {
     @FormUrlEncoded
     @POST("insertthuvienplaylist.php")
     Call<PhanHoiDangKyModel> insertthuvien(@FieldMap HashMap<String, String> params);
+    @FormUrlEncoded
+    @POST("danhsachbaihatthuvienplaylist.php")
+    Call<List<BaiHatThuVienPlayListModel>> GetDanhsachbaihatthuvienplaylist(@Field("idthuvienplaylist") String id);
+
+    @FormUrlEncoded
+    @POST("deletebaihatthuvien.php")
+    Call<ResponseModel> deletemotbaihatthuvien(@Field("idbaihatthuvien") int idbaihatthuvien);
+    @FormUrlEncoded
+    @POST("updatehinhthuvien.php")
+    Call<ResponseModel> updatehinhthuvien(@Field("idthuvien") int idthuvien, @Field("hinhthuvien") String hinhthuvien);
+
+    @FormUrlEncoded
+    @POST("insertnhacthuvienplaylist.php")
+    Call<ResponseModel> insertnhacthuvien(@Field("idthuvien") int idthuvien, @Field("idbaihat") int idbaihat);
 }

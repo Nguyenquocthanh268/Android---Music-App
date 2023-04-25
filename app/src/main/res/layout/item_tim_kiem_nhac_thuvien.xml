@@ -7,54 +7,60 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageViewhinhbaihat"
+        android:id="@+id/imgnhacthuvien"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/imgitem" />
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
-        android:id="@+id/textViewtenbaihat"
+        android:id="@+id/txttennhacthuvien"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="16dp"
-
+        android:fontFamily="@font/arimo_bold"
         android:maxWidth="300dp"
         android:text="Tên Bài Hát"
         android:textColor="#FBFBFB"
         android:textSize="21sp"
         android:maxLines="1"
-        app:layout_constraintStart_toEndOf="@+id/imageViewhinhbaihat"
+        app:layout_constraintStart_toEndOf="@+id/imgnhacthuvien"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewtencasi"
+        android:id="@+id/txtcasinhacthuvien"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="6dp"
-
+        android:fontFamily="@font/arimo_bold"
         android:maxWidth="250dp"
         android:text="Ca siz"
         android:textColor="#C3C3C3"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/imageViewhinhbaihat"
-        app:layout_constraintTop_toBottomOf="@+id/textViewtenbaihat" />
+        app:layout_constraintStart_toEndOf="@+id/imgnhacthuvien"
+        app:layout_constraintTop_toBottomOf="@+id/txttennhacthuvien" />
 
-    <View
-        android:layout_marginTop="4dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewhinhbaihat"
-        android:background="#800098AE"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"/>
-
+    <ImageView
+        android:id="@+id/imginsertnhacthuvien"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/plus_24px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 </androidx.constraintlayout.widget.ConstraintLayout>
