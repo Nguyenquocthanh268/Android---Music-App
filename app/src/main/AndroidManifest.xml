@@ -24,6 +24,7 @@
         </activity>
         <activity android:name=".Activity.DanhsachbaihatActivity" />
         <activity android:name=".Activity.PlayNhacActivity" />
+        <activity android:name=".Activity.InsertNhacThuVienActivity"/>
 
         <activity
             android:name=".Activity.DangNhapActivity"

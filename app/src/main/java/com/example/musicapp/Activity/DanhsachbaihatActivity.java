@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.musicapp.Adapter.DanhsachbaihatAdapter;
+import com.example.musicapp.Adapter.dsbhthuvienplaylistAdapter;
 import com.example.musicapp.Model.BaiHatModel;
+import com.example.musicapp.Model.BaiHatThuVienPlayListModel;
 import com.example.musicapp.Model.BaiHatYeuThichModel;
 import com.example.musicapp.Model.BangXepHangModel;
 import com.example.musicapp.Model.ChuDeModel;
@@ -23,6 +25,7 @@ import com.example.musicapp.Model.NgheSiModel;
 import com.example.musicapp.Model.PhoBienModel;
 import com.example.musicapp.Model.PlaylistModel;
 import com.example.musicapp.Model.ThinhHanhModel;
+import com.example.musicapp.Model.ThuVienPlayListModel;
 import com.example.musicapp.R;
 import com.example.musicapp.Service_API.APIService;
 import com.example.musicapp.Service_API.Dataservice;
@@ -49,11 +52,14 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     BangXepHangModel bangXepHang = null;
 
     BaiHatYeuThichModel baiHatYeuThichModel = null;
-
+    ThuVienPlayListModel thuVienPlayList = null;
     ImageView imgdanhsachcakhuc;
     ArrayList<BaiHatModel> mangbaihat;
 
+
     DanhsachbaihatAdapter danhsachbaihatAdapter;
+    ArrayList<BaiHatThuVienPlayListModel> mangbaihatthuvienplaylist;
+    dsbhthuvienplaylistAdapter dsbhthuvienplaylistadapter;
 
     ImageView btnThemnhac;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -106,11 +112,28 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             txtcollapsing.setText(bangXepHang.getTenBangXepHang());
             getSupportActionBar().setTitle(bangXepHang.getTenBangXepHang());
         }
+        if (thuVienPlayList != null && !thuVienPlayList.equals("")){
+            setValueInView(thuVienPlayList.getHinhThuVienPlaylist());
+            GetDataThuVienPlayList(String.valueOf(thuVienPlayList.getIDThuVienPlayList()));
+            txtcollapsing.setText(thuVienPlayList.getTenThuVienPlayList());
+            getSupportActionBar().setTitle(thuVienPlayList.getTenThuVienPlayList());
+        }
 
 
         floatActionButtonClick();
 
-
+        btnThemnhac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("ok");
+                Intent intent = getIntent();
+                if(intent.hasExtra("idthuvienplaylist")){
+                    intent = new Intent(DanhsachbaihatActivity.this, InsertNhacThuVienActivity.class);
+                    intent.putExtra("id", id);
+                    startActivity(intent);
+                }
+            }
+        });
 
 
     }
@@ -227,6 +250,24 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             }
         });
     }
+    private void GetDataThuVienPlayList(String id) {
+        Dataservice dataservice = APIService.getService();
+        Call<List<BaiHatThuVienPlayListModel>> callback = dataservice.GetDanhsachbaihatthuvienplaylist(id);
+        callback.enqueue(new Callback<List<BaiHatThuVienPlayListModel>>() {
+            @Override
+            public void onResponse(Call<List<BaiHatThuVienPlayListModel>> call, Response<List<BaiHatThuVienPlayListModel>> response) {
+                mangbaihatthuvienplaylist = (ArrayList<BaiHatThuVienPlayListModel>) response.body();
+                dsbhthuvienplaylistadapter = new dsbhthuvienplaylistAdapter(DanhsachbaihatActivity.this, mangbaihatthuvienplaylist);
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                recyclerViewdanhsachbaihat.setAdapter(dsbhthuvienplaylistadapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHatThuVienPlayListModel>> call, Throwable t) {
+
+            }
+        });
+    }
 
 
     private void AnhXa() {
@@ -274,14 +315,12 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             if (intent.hasExtra("cakhucyeuthich")){
                 bangXepHang = (BangXepHangModel) intent.getSerializableExtra("intentbangxephang");
             }
-
-
-//            else
-//            if(intent.hasExtra("idthuvienplaylist")){
-//                thuVienPlayList = (ThuVienPlayListModel) intent.getSerializableExtra("idthuvienplaylist");
-//                id = thuVienPlayList.getIDThuVienPlayList();
-//                btnThemnhac.setVisibility(View.VISIBLE);
-//            }
+            else
+            if(intent.hasExtra("idthuvienplaylist")){
+                thuVienPlayList = (ThuVienPlayListModel) intent.getSerializableExtra("idthuvienplaylist");
+                id = thuVienPlayList.getIDThuVienPlayList();
+                btnThemnhac.setVisibility(View.VISIBLE);
+            }
         }
     }
     private void floatActionButtonClick(){
@@ -298,16 +337,16 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
                         Toast.makeText(DanhsachbaihatActivity.this, "Danh sách không có bài hát nào cả :(", Toast.LENGTH_SHORT).show();
                     }
                 }
-//                else{
-//                    if (mangbaihatthuvienplaylist != null){
-//                        if (mangbaihatthuvienplaylist.size() > 0){
-//                            intent.putExtra("cacbaihatthuvien", mangbaihatthuvienplaylist);
-//                            startActivity(intent);
-//                        }else {
-//                            Toast.makeText(DanhsachbaihatActivity.this, "Danh sách không có bài hát nào cả :(", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                }
+                else{
+                    if (mangbaihatthuvienplaylist != null){
+                        if (mangbaihatthuvienplaylist.size() > 0){
+                            intent.putExtra("cacbaihatthuvien", mangbaihatthuvienplaylist);
+                            startActivity(intent);
+                        }else {
+                            Toast.makeText(DanhsachbaihatActivity.this, "Danh sách không có bài hát nào cả :(", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
             }
         });
     }
