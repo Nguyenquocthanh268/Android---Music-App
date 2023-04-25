@@ -111,4 +111,7 @@ public interface Dataservice {
     @FormUrlEncoded
     @POST("checkyeuthich.php")
     Call<ResponseModel> checkyeuthich(@Field("username") String username, @Field("idbaihat") int idbaihat);
+    @FormUrlEncoded
+    @POST("insertthuvienplaylist.php")
+    Call<PhanHoiDangKyModel> insertthuvien(@FieldMap HashMap<String, String> params);
 }
