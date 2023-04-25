@@ -9,20 +9,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.musicapp.Activity.DanhsachbaihatActivity;
 import com.example.musicapp.Model.ThuVienPlayListModel;
 import com.example.musicapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ThuVienPlayListAdapter extends RecyclerView.Adapter<ThuVienPlayListAdapter.ViewHolder> {
 
@@ -51,14 +47,14 @@ public class ThuVienPlayListAdapter extends RecyclerView.Adapter<ThuVienPlayList
         holder.txttenthuvienplaylist.setText(thuVienPlayList.getTenThuVienPlayList());
         holder.txttennguoidung.setText("Danh sách phát của "+tennguoidung);
         Picasso.get().load(thuVienPlayList.getHinhThuVienPlaylist()).into(holder.imgthuvienplaylist);
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, DanhsachbaihatActivity.class);
-//                intent.putExtra("idthuvienplaylist", mangthuvienplaylist.get(position));
-//                context.startActivity(intent);
-//            }
-//        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+                intent.putExtra("idthuvienplaylist", mangthuvienplaylist.get(position));
+                context.startActivity(intent);
+            }
+        });
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
