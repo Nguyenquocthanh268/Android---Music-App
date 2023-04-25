@@ -1,14 +1,13 @@
 package com.example.musicapp.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.musicapp.Adapter.MainViewPagerAdapter;
 import com.example.musicapp.Fragment.Fragment_Profile;
@@ -99,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
 
     public String getName() {
         return name;
+    }
+    public String getTaikhoan() {
+        return taikhoan;
     }
 }
 

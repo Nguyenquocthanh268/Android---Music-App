@@ -1,18 +1,14 @@
 package com.example.musicapp.Service_API;
 
 import com.example.musicapp.Model.BaiHatModel;
-//import com.example.musicapp.Model.BaiHatThuVienPlayListModel;
-//import com.example.musicapp.Model.BaiHatYeuThichModel;
+import com.example.musicapp.Model.BaiHatYeuThichModel;
 import com.example.musicapp.Model.BangXepHangModel;
 import com.example.musicapp.Model.ChuDeModel;
 import com.example.musicapp.Model.NgheSiModel;
-//import com.example.musicapp.Model.NguoiDungModel;
-//import com.example.musicapp.Model.PhanHoiDangKyModel;
 import com.example.musicapp.Model.NguoiDungModel;
 import com.example.musicapp.Model.PhanHoiDangKyModel;
 import com.example.musicapp.Model.PhoBienModel;
 import com.example.musicapp.Model.PlaylistModel;
-//import com.example.musicapp.Model.ResponseModel;
 import com.example.musicapp.Model.ResponseModel;
 import com.example.musicapp.Model.ThinhHanhModel;
 import com.example.musicapp.Model.ThuVienPlayListModel;
@@ -100,4 +96,19 @@ public interface Dataservice {
     @FormUrlEncoded
     @POST("checkusername.php")
     Call<ResponseModel> checkusername(@Field("username") String username);
+
+    @FormUrlEncoded
+    @POST("danhsachyeuthich.php")
+    Call<List<BaiHatYeuThichModel>> danhsachyeuthich(@Field("username") String username);
+    @FormUrlEncoded
+    @POST("insertyeuthich.php")
+    Call<ResponseModel> insertyeuthich(@Field("username") String username, @Field("idbaihat") int idbaihat);
+
+    @FormUrlEncoded
+    @POST("deleteyeuthich.php")
+    Call<ResponseModel> deleteyeuthich(@Field("username") String username, @Field("idbaihat") int idbaihat);
+
+    @FormUrlEncoded
+    @POST("checkyeuthich.php")
+    Call<ResponseModel> checkyeuthich(@Field("username") String username, @Field("idbaihat") int idbaihat);
 }

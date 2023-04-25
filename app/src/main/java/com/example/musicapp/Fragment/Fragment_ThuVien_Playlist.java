@@ -13,9 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-
+import com.example.musicapp.Activity.MainActivity;
 import com.example.musicapp.Adapter.ThuVienPlayListAdapter;
+import com.example.musicapp.Model.ThuVienPlayListModel;
 import com.example.musicapp.R;
+import com.example.musicapp.Service_API.APIService;
+import com.example.musicapp.Service_API.Dataservice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +34,7 @@ public class Fragment_ThuVien_Playlist extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerViewThuVienPlayList;
     TextView tenThuVienPlayList;
-//    HomeActivity hm;
+   MainActivity hm;
 
     @Nullable
     @Override
@@ -39,38 +42,38 @@ public class Fragment_ThuVien_Playlist extends Fragment {
         view = inflater.inflate(R.layout.fragment_thuvien_playlist, container, false);
         recyclerViewThuVienPlayList = view.findViewById(R.id.recyclerviewthuvienplaylist);
         tenThuVienPlayList = view.findViewById(R.id.textviewthuvienplaylist);
-//        hm = (HomeActivity) getActivity();
-//        GetData(hm.getTaikhoan());
+        hm = (MainActivity) getActivity();
+        GetData(hm.getTaikhoan());
         swipeRefreshLayout = view.findViewById(R.id.swipethuvien);
-//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-////            public void onRefresh() {
-////                GetData(hm.getTaikhoan());
-////                thuVienPlayListAdapter.notifyDataSetChanged();
-////                swipeRefreshLayout.setRefreshing(false);
-////            }
-//        });
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+           @Override
+            public void onRefresh() {
+               GetData(hm.getTaikhoan());
+                thuVienPlayListAdapter.notifyDataSetChanged();
+               swipeRefreshLayout.setRefreshing(false);
+           }
+      });
         return view;
     }
-//    public void GetData(String id) {
-//        Dataservice dataservice = APIService.getService();
-//        Call<List<ThuVienPlayListModel>> callback = dataservice.GetBangThuVienPlayList(id);
-//        callback.enqueue(new Callback<List<ThuVienPlayListModel>>() {
-//            @Override
-//            public void onResponse(Call<List<ThuVienPlayListModel>> call, Response<List<ThuVienPlayListModel>> response) {
-//                ArrayList<ThuVienPlayListModel> mangthuvienplaylist = (ArrayList<ThuVienPlayListModel>) response.body();
-//                thuVienPlayListAdapter = new ThuVienPlayListAdapter(getActivity(), mangthuvienplaylist, hm.getName());
-//                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-//                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//                recyclerViewThuVienPlayList.setLayoutManager(linearLayoutManager);
-//                recyclerViewThuVienPlayList.setAdapter(thuVienPlayListAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<ThuVienPlayListModel>> call, Throwable t) {
-//
-//            }
-//
-//        });
-//    }
+    public void GetData(String id) {
+        Dataservice dataservice = APIService.getService();
+        Call<List<ThuVienPlayListModel>> callback = dataservice.GetBangThuVienPlayList(id);
+        callback.enqueue(new Callback<List<ThuVienPlayListModel>>() {
+            @Override
+            public void onResponse(Call<List<ThuVienPlayListModel>> call, Response<List<ThuVienPlayListModel>> response) {
+                ArrayList<ThuVienPlayListModel> mangthuvienplaylist = (ArrayList<ThuVienPlayListModel>) response.body();
+                thuVienPlayListAdapter = new ThuVienPlayListAdapter(getActivity(), mangthuvienplaylist, hm.getName());
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                recyclerViewThuVienPlayList.setLayoutManager(linearLayoutManager);
+                recyclerViewThuVienPlayList.setAdapter(thuVienPlayListAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<ThuVienPlayListModel>> call, Throwable t) {
+
+            }
+
+        });
+    }
 }
