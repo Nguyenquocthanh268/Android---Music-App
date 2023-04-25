@@ -51,7 +51,6 @@
             android:id="@+id/textViewtenbaihatplaynhac"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/arimo_bold"
             android:maxWidth="310dp"
             android:text="Shape of you"
             android:textColor="#FFFFFF"
@@ -63,7 +62,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewtenbaihatplaynhac"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/arimo_bold"
             android:maxWidth="350dp"
             android:text="Ed Sheeran"
             android:textColor="#E4E4E4"
@@ -105,7 +103,6 @@
             android:id="@+id/textViewruntime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/arimo_bold"
             android:text="--:--"
             android:textColor="#E4E4E4"
             android:textSize="18sp" />
@@ -115,7 +112,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:fontFamily="@font/arimo_bold"
             android:text="--:--"
             android:textColor="#E8E8E8"
             android:textSize="18sp" />

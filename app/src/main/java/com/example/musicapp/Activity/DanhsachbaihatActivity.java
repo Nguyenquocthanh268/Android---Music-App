@@ -1,8 +1,9 @@
 package com.example.musicapp.Activity;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,9 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-
 import com.example.musicapp.Adapter.DanhsachbaihatAdapter;
 import com.example.musicapp.Model.BaiHatModel;
+import com.example.musicapp.Model.BaiHatYeuThichModel;
 import com.example.musicapp.Model.BangXepHangModel;
 import com.example.musicapp.Model.ChuDeModel;
 import com.example.musicapp.Model.NgheSiModel;
@@ -47,6 +48,8 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     ChuDeModel chuDe = null;
     BangXepHangModel bangXepHang = null;
 
+    BaiHatYeuThichModel baiHatYeuThichModel = null;
+
     ImageView imgdanhsachcakhuc;
     ArrayList<BaiHatModel> mangbaihat;
 
@@ -60,6 +63,8 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danhsachbaihat);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         AnhXa();
         floatingActionButton.setEnabled(false);
         DataIntent();
@@ -265,6 +270,12 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             if (intent.hasExtra("intentbangxephang")){
                 bangXepHang = (BangXepHangModel) intent.getSerializableExtra("intentbangxephang");
             }
+            else
+            if (intent.hasExtra("cakhucyeuthich")){
+                bangXepHang = (BangXepHangModel) intent.getSerializableExtra("intentbangxephang");
+            }
+
+
 //            else
 //            if(intent.hasExtra("idthuvienplaylist")){
 //                thuVienPlayList = (ThuVienPlayListModel) intent.getSerializableExtra("idthuvienplaylist");

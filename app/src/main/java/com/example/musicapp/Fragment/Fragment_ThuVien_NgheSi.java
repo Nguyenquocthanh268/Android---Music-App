@@ -8,11 +8,22 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.example.musicapp.Adapter.ThuVienNgheSiAdapter;
+import com.example.musicapp.Model.NgheSiModel;
 import com.example.musicapp.R;
+import com.example.musicapp.Service_API.APIService;
+import com.example.musicapp.Service_API.Dataservice;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+import retrofit2.Callback;
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class Fragment_ThuVien_NgheSi  extends Fragment {
 
@@ -24,31 +35,31 @@ public class Fragment_ThuVien_NgheSi  extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_thuvien_nghesi, container, false);
         recyclerViewNgheSi = view.findViewById(R.id.recyclerviewnthuvienghesi);
-//        GetData();
+           GetData();
         return view;
     }
 
-//    private void GetData() {
-//        Dataservice dataservice = APIService.getService();
-//        Call<List<NgheSiModel>> callback = dataservice.GetNgheSiCurrent();
-//        callback.enqueue(new Callback<List<NgheSiModel>>() {
-//            @Override
-//            public void onResponse(Call<List<NgheSiModel>> call, Response<List<NgheSiModel>> response) {
-//                ArrayList<NgheSiModel> mangnghesi = (ArrayList<NgheSiModel>) response.body();
-//                thuVienNgheSiAdapter = new ThuVienNgheSiAdapter(getActivity(), mangnghesi);
-//
-//                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-//                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//                recyclerViewNgheSi.setLayoutManager(linearLayoutManager);
-//                recyclerViewNgheSi.setAdapter(thuVienNgheSiAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<NgheSiModel>> call, Throwable t) {
-//
-//            }
-//
-//        });
-//    }
+    private void GetData() {
+        Dataservice dataservice = APIService.getService();
+        Call<List<NgheSiModel>> callback = dataservice.GetNgheSiCurrent();
+        callback.enqueue(new Callback<List<NgheSiModel>>() {
+            @Override
+            public void onResponse(Call<List<NgheSiModel>> call, Response<List<NgheSiModel>> response) {
+                ArrayList<NgheSiModel> mangnghesi = (ArrayList<NgheSiModel>) response.body();
+                thuVienNgheSiAdapter = new ThuVienNgheSiAdapter(getActivity(), mangnghesi);
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                recyclerViewNgheSi.setLayoutManager(linearLayoutManager);
+                recyclerViewNgheSi.setAdapter(thuVienNgheSiAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<NgheSiModel>> call, Throwable t) {
+
+            }
+
+        });
+    }
 
 }

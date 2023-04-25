@@ -46,19 +46,6 @@
         app:layout_constraintStart_toEndOf="@+id/imageViewhinhbaihat"
         app:layout_constraintTop_toBottomOf="@+id/textViewtenbaihat" />
 
-    <ImageView
-        android:id="@+id/imageViewtimdanhsachbaihat"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/iconlove"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
     <View
         android:layout_marginTop="4dp"
         android:layout_marginStart="8dp"

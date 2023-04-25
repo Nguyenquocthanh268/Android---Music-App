@@ -12,8 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-
+import com.example.musicapp.Activity.MainActivity;
+import com.example.musicapp.Adapter.YeuThichAdapter;
+import com.example.musicapp.Model.BaiHatYeuThichModel;
 import com.example.musicapp.R;
+import com.example.musicapp.Service_API.APIService;
+import com.example.musicapp.Service_API.Dataservice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +28,8 @@ import retrofit2.Response;
 
 public class Fragment_ThuVien_YeuThich extends Fragment {
     View view;
-//    private HomeActivity hm;
-//    private YeuThichAdapter yeuThichAdapter;
+    private MainActivity hm;
+    private YeuThichAdapter yeuThichAdapter;
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView;
     @Nullable
@@ -33,37 +37,37 @@ public class Fragment_ThuVien_YeuThich extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_thuvien_yeuthich, container, false);
         recyclerView = view.findViewById(R.id.recyclerviewyeuthich);
-//        hm = (HomeActivity) getActivity();
-//        GetData(hm.getTaikhoan());
+        hm = (MainActivity) getActivity();
+        GetData(hm.getTaikhoan());
         swipeRefreshLayout = view.findViewById(R.id.swipeyeuthich);
-//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                GetData(hm.getTaikhoan());
-//                yeuThichAdapter.notifyDataSetChanged();
-//                swipeRefreshLayout.setRefreshing(false);
-//            }
-//        });
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                GetData(hm.getTaikhoan());
+                yeuThichAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         return view;
     }
-//    public void GetData(String username) {
-//        Dataservice dataservice = APIService.getService();
-//        Call<List<BaiHatYeuThichModel>> callback = dataservice.danhsachyeuthich(username);
-//        callback.enqueue(new Callback<List<BaiHatYeuThichModel>>() {
-//            @Override
-//            public void onResponse(Call<List<BaiHatYeuThichModel>> call, Response<List<BaiHatYeuThichModel>> response) {
-//                ArrayList<BaiHatYeuThichModel> mangyeuthich = (ArrayList<BaiHatYeuThichModel>) response.body();
-//                yeuThichAdapter = new YeuThichAdapter(getActivity(), mangyeuthich);
-//                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-//                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//                recyclerView.setLayoutManager(linearLayoutManager);
-//                recyclerView.setAdapter(yeuThichAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<BaiHatYeuThichModel>> call, Throwable t) {
-//
-//            }
-//        });
-//    }
+    public void GetData(String username) {
+        Dataservice dataservice = APIService.getService();
+        Call<List<BaiHatYeuThichModel>> callback = dataservice.danhsachyeuthich(username);
+        callback.enqueue(new Callback<List<BaiHatYeuThichModel>>() {
+            @Override
+            public void onResponse(Call<List<BaiHatYeuThichModel>> call, Response<List<BaiHatYeuThichModel>> response) {
+                ArrayList<BaiHatYeuThichModel> mangyeuthich = (ArrayList<BaiHatYeuThichModel>) response.body();
+                yeuThichAdapter = new YeuThichAdapter(getActivity(), mangyeuthich);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setAdapter(yeuThichAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHatYeuThichModel>> call, Throwable t) {
+
+            }
+        });
+    }
 }

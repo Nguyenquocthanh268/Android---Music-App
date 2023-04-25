@@ -59,7 +59,6 @@ public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAd
             txttenbaihat = itemView.findViewById(R.id.textViewtenbaihat);
             txttencasi = itemView.findViewById(R.id.textViewtencasi);
             hinhbaihat = itemView.findViewById(R.id.imageViewhinhbaihat);
-            tim = itemView.findViewById(R.id.imageViewtimdanhsachbaihat);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

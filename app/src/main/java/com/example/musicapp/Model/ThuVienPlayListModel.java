@@ -6,15 +6,15 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class ThuVienPlayListModel implements Serializable {
-    @SerializedName("IDThuVienPlayList")
+    @SerializedName("Id")
     @Expose
     private int idThuVienPlayList;
 
-    @SerializedName("TenThuVienPlayList")
+    @SerializedName("Ten")
     @Expose
     private String tenThuVienPlayList;
 
-    @SerializedName("HinhThuVienPlayList")
+    @SerializedName("HinhAnh")
     @Expose
     private String hinhThuVienPlaylist;
 
